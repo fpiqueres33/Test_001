@@ -1,0 +1,24 @@
+- Realizar diagrama y esquema de flujo.
+- Importancia de las NER.
+
+Etapas a mejorar:
+- Estrategia para la selección de frases.
+- Mejora del NER.
+- API  v1.1
+
+
+- Estrategias:
+- Análisis lingüistico
+- Ponerlo en API ver 1.0
+
+
+Añadir la parte:
+- semántica
+- sintaxis
+* wsd   palabras ambiguas 
+
+Elegir estrategia:
+- Frases con tópicos.
+- Estrutucas basadas en el NER
+
+API

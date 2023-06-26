@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <style>
+        .box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .scroll-box {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+
+    <h1>GENERADOR DE RESÚMENES</h1>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box">
+                    <h3>Statistics</h3>
+                    <p>Número palabras: {{ words }}</p>
+                    <p>Numero de oraciones: {{ sentences }}</p>
+                    <p>Longitud media oración: {{ avg_length }}</p>
+                    <p>Mediana oración: {{ median_length }}</p>
+                    <img src="{{ url_for('static', filename='sentence_histogram.png') }}" alt="Histogram of Sentence Lengths">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box scroll-box">
+                    <h3>Topics</h3>
+                    <h4>LDA Topicos</h4>
+                    <ul>
+                        {% for topic in lda_topics %}
+                            <li>{{ topic }}</li>
+                        {% endfor %}
+                    </ul>
+                    <h4>RAKE Tópicos</h4>
+                    <ul>
+                        {% for topic in rake_topics %}
+                            <li>{{ topic }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box scroll-box">
+                    <h3>NER (Named Entity Recognition)</h3>
+                    <ul>
+                        {% for entity in top_entities %}
+                            <li>{{ entity }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box scroll-box">
+                    <h3>Summarization - Resumen</h3>
+                    <ul>
+                        {% for sentence in top_sentences %}
+                            <li>{{ sentence }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="btn btn-secondary" onclick="location.href='{{ url_for("index") }}'">VOLVER</button>
+           <a href="/download/summary.txt" class="btn btn-primary" download>DESCARGAR</a>
+        </div>
+    </div>
+</body>
+</html>
